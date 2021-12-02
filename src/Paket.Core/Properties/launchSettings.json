@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Paket.Core": {
+      "commandName": "Project"
+    }
+  }
+}
