@@ -1,3 +1,6 @@
+#### 7.0.0-alpha003 - 2021-11-09
+* Support as .NET 6.0 tool
+
 #### 6.2.1 - 2021-10-13
 * Roll forward for .NET tool - https://github.com/fsprojects/Paket/pull/4089
 
