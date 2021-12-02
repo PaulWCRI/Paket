@@ -20,6 +20,7 @@ open Paket.NuGetCache
 open Paket.PackageResolver
 open System.Net.Http
 open System.Threading
+open Paket.Git
 
 type NuGetContent =
     | NuGetDirectory of name:string * contents:NuGetContent list
@@ -586,6 +587,8 @@ let getVersionsCached key f (source, auth, nugetURL, package) =
 /// Allows to retrieve all version no. for a package from the given sources.
 let GetVersions force alternativeProjectRoot root (parameters:GetPackageVersionsParameters) = async {
     let packageName = parameters.Package.PackageName
+    //if packageName.Name.Contains "FSharp.Core" then noop parameters
+    if packageName.Name.Contains "NStack.Core" then noop parameters
     let sources = parameters.Package.Sources
     let verboseRequest = verbose || isRequestEnvVarSet
     let trial force = async {
@@ -611,6 +614,7 @@ let GetVersions force alternativeProjectRoot root (parameters:GetPackageVersions
             sources
             |> Seq.map (fun (errorFileExists,nugetSource) ->
                 async {
+                       //if packageName.Name.Contains("FSharp.Text.RegexProvider") then noop 5
                        if (not force) && errorFileExists then return [] else
                        match nugetSource with
                        | NuGetV2 source ->
@@ -753,6 +757,8 @@ let GetVersions force alternativeProjectRoot root (parameters:GetPackageVersions
                 reportRequests verboseRequest trial1
                 |> printfn "%s"
             let! trial2 = trial true
+            if packageName.Name.Contains "NStack.Core" then noop parameters
+            if packageName.Name.Contains "FSharp.Core" then noop parameters
             match trial2 with
             | _ when Array.isEmpty trial2.Versions |> not ->
                 return trial2.Requests

@@ -36,8 +36,8 @@ module internal NuSpecParserHelper =
             match PlatformMatching.extractPlatforms false framework with
             | Some pp -> Some (name, version, pp)
             | None ->
-                if not (framework.StartsWith "_") then
-                    Logging.traceWarnIfNotBefore ("NuSpecFile", framework, fileName) "Could not detect any platforms from '%s' in '%s', please tell the package authors" framework fileName
+                //if not (framework.StartsWith "_") then
+                //    Logging.traceWarnIfNotBefore ("NuSpecFile", framework, fileName) "Could not detect any platforms from '%s' in '%s', please tell the package authors" framework fileName
                 None
         | _ -> Some(name,version, PlatformMatching.ParsedPlatformPath.Empty)
 
@@ -83,8 +83,8 @@ type Nuspec =
                     match PlatformMatching.extractPlatforms false framework with
                     | Some p -> Some p
                     | None ->
-                        if not (framework.StartsWith "_") then
-                            Logging.traceWarnIfNotBefore ("NuSpecFile", framework, fileName) "Could not detect any platforms from '%s' in '%s', please tell the package authors" framework fileName
+                        //if not (framework.StartsWith "_") then
+                        //    Logging.traceWarnIfNotBefore ("NuSpecFile", framework, fileName) "Could not detect any platforms from '%s' in '%s', please tell the package authors" framework fileName
                         None
                 | _ -> Some PlatformMatching.ParsedPlatformPath.Empty)
 

@@ -48,8 +48,8 @@ let extractPlatforms warn path =
     else
         match extractPlatformsPriv path with
         | None ->
-            if warn && not (path.StartsWith("_")) then
-                Logging.traceWarnIfNotBefore ("extractPlatforms", path) "Could not detect any platforms from '%s', please tell the package authors" path
+            //if warn && not (path.StartsWith("_")) then
+            //    Logging.traceWarnIfNotBefore ("extractPlatforms", path) "Could not detect any platforms from '%s', please tell the package authors" path
             None
         | Some s -> Some s
 

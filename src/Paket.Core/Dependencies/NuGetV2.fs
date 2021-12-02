@@ -195,8 +195,8 @@ let private handleODataEntry nugetURL packageName version entry =
                 | Some p ->
                     Some p
                 | None ->
-                    if not (restriction.StartsWith "_") then 
-                        Logging.traceWarnIfNotBefore ("Package", restriction, packageName, version) "Could not detect any platforms from '%s' in package %O %O, please tell the package authors" restriction packageName version
+                    //if not (restriction.StartsWith "_") then 
+                    //    Logging.traceWarnIfNotBefore ("Package", restriction, packageName, version) "Could not detect any platforms from '%s' in package %O %O, please tell the package authors" restriction packageName version
                     None
              else Some PlatformMatching.ParsedPlatformPath.Empty)
             |> Option.map (fun pp -> name, version, pp)

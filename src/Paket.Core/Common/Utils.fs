@@ -20,6 +20,9 @@ open System.Collections.Concurrent
 open System.Diagnostics
 open System.Collections.Generic
 
+let noop x = 
+    let q = x
+    ()
 let sndOf3 (_,v,_) = v
 let thirdOf3 (_,_,v) = v
 

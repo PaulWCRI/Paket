@@ -1082,8 +1082,8 @@ let Resolve (getVersionsRaw : PackageVersionsFunc, getPreferredVersionsRaw : Pre
                     |> Seq.toList
                 with e ->
                     let message =
-                        sprintf "Unable to retrieve package versions for '%O'%s%s"
-                            versionParams.Package.PackageName Environment.NewLine currentStep.RequirementDisplay
+                        sprintf "Unable to retrieve package versions for '%O'%s%s\r\n%O"
+                            versionParams.Package.PackageName Environment.NewLine currentStep.RequirementDisplay e
                     raise (Exception (message, e))
             let sorted =
                 match resolverStrategy with

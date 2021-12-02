@@ -439,18 +439,18 @@ let InstallIntoProjects(options : InstallerOptions, forceTouch, dependenciesFile
                 match dict.TryGetValue packageName with
                 | true,(_,true,_) when hasCondition ->
                     true
-                | true,(v',_,restrictions') ->
+                | true,(vv,_,restrictions') ->
                     let filtered = filterRestrictions settings.FrameworkRestrictions restrictions'
                     dict.[packageName] <- (v,hasCondition,filtered)
-                    if v' = v then
-                        traceWarnfn "Package %O is referenced through multiple groups in %s (inspect lockfile for details). To resolve this warning use a single group for this project to get a unified dependency resolution or use conditions on the groups." packageName project.FileName
+                    if vv = v then
+                        //traceWarnfn "Package %O is referenced through multiple groups in %s (inspect lockfile for details). To resolve this warning use a single group for this project to get a unified dependency resolution or use conditions on the groups." packageName project.FileName
                         false
                     else
                         match settings.FrameworkRestrictions, restrictions' with
                         | ExplicitRestriction r, ExplicitRestriction r2 when not (r.IsSubsetOf r2 || r = r2) ->
                             true
                         | _ ->
-                            errors.Add (sprintf "Package %O is referenced in different versions in %s (%O vs %O), (inspect the lockfile for details) to resolve this either add all dependencies to a single group (to get a unified resolution) or use a condition on both groups and control compilation yourself." packageName project.FileName v' v)
+                            errors.Add (sprintf "Package %O is referenced in different versions in %s (%O vs %O), (inspect the lockfile for details) to resolve this either add all dependencies to a single group (to get a unified resolution) or use a condition on both groups and control compilation yourself." packageName project.FileName vv v)
                             false
                 | _ ->
                     dict.Add(packageName,(v,hasCondition,settings.FrameworkRestrictions))

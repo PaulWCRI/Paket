@@ -11,6 +11,22 @@ open Paket.NuGetCache
 let getAllVersionsFromLocalPath (isCache, localNugetPath, package:PackageName, alternativeProjectRoot, root) =
     let localNugetPath = Utils.normalizeLocalPath localNugetPath
     let di = getDirectoryInfoForLocalNuGetFeed localNugetPath alternativeProjectRoot root
+    let q fileName =
+        let fi = FileInfo(fileName)
+        let x=package.Name
+        let y=package.CompareString
+        let kw = "NStack.Core"
+        if fi.Name.Contains(kw) && (package.Name.Contains(kw) ||  package.CompareString.Contains(kw)) then
+            noop 0
+        else
+            ()
+        let _match = Regex(sprintf @"^%O\.(\d.*)\.nupkg" package, RegexOptions.IgnoreCase).Match(fi.Name)
+        let c = _match.Groups.Count
+        if c > 1 then 
+            Some _match.Groups.[1].Value 
+        else
+            //noop (localNugetPath, package, alternativeProjectRoot, root)
+            None
     NuGetCache.NuGetRequestGetVersions.ofSimpleFunc di.FullName (fun _ ->
         async {
             if not di.Exists then
@@ -18,16 +34,15 @@ let getAllVersionsFromLocalPath (isCache, localNugetPath, package:PackageName, a
                     di.Create()
                 else
                     failwithf "The directory %s doesn't exist.%sPlease check the NuGet source feed definition in your paket.dependencies file." di.FullName Environment.NewLine
-
-            let versions =
+                                
+            let versions() =
                 Directory.EnumerateFiles(di.FullName,"*.nupkg",SearchOption.AllDirectories)
+                |> Seq.toList
+                //|> fun x -> noop x ; x
                 |> Seq.filter (fun fi -> fi.EndsWith ".symbols.nupkg" |> not)
-                |> Seq.choose (fun fileName ->
-                                let fi = FileInfo(fileName)
-                                let _match = Regex(sprintf @"^%O\.(\d.*)\.nupkg" package, RegexOptions.IgnoreCase).Match(fi.Name)
-                                if _match.Groups.Count > 1 then Some _match.Groups.[1].Value else None)
+                |> Seq.choose q
                 |> Seq.toArray
-            return SuccessResponse(versions)
+            return SuccessResponse(versions())
         })
 
 let findLocalPackage directory (packageName:PackageName) (version:SemVerInfo) =

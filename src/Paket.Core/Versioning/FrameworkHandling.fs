@@ -1006,6 +1006,7 @@ module FrameworkDetection =
                 | MatchTfm "xamarintvos" (allowVersions ["";"1"]) () -> Some XamarinTV
                 | MatchTfm "xamarinmac" (allowVersions ["";"1";"2"]) () -> Some XamarinMac
                 | "native/x86/debug" -> Some(Native(Debug,Win32))
+                | "net,version=v4.7.2" -> Some(Native(Debug,X64))
                 | "native/x64/debug" -> Some(Native(Debug,X64))
                 | "native/arm/debug" -> Some(Native(Debug,Arm))
                 | "native/x86/release" -> Some(Native(Release,Win32))
