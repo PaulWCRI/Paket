@@ -10,6 +10,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IsPackable>true</IsPackable>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>TRACE</DefineConstants>
@@ -109,7 +111,6 @@
     <Compile Include="Packaging\PackageMetaData.fs" />
     <Compile Include="Packaging\PackageProcess.fs" />
     <Compile Include="PublicAPI.fs" />
-    <None Include="paket.template" />
     <Content Include="app.config" Condition=" '$(TargetFramework)' == 'net461' " />
     <None Include="Prototypes\script-generation.fsx" />
   </ItemGroup>

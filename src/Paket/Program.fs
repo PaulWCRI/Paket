@@ -25,7 +25,7 @@ let paketVersion =
   let attrs = System.Reflection.Assembly.GetExecutingAssembly().GetCustomAttributes(false)
 
   attrs
-  |> Seq.pick (fun a -> match a with | :? System.Reflection.AssemblyInformationalVersionAttribute as i -> Some i.InformationalVersion | _ -> None)
+  |> Seq.pick (fun a -> match a with | :? System.Reflection.AssemblyVersionAttribute as i -> Some i.Version | _ -> None)
 
 let mutable tracedVersion = false
 
@@ -79,7 +79,7 @@ let processWithValidationEx printUsage silent validateF commandF result =
                         | Profile.Category.ResolverAlgorithmNotBlocked _ -> None
                         | _ -> Some elapsed)
                     |> List.fold (+) TimeSpan.Zero
-                tracefn "Total time taken: %s" (Utils.TimeSpanToReadableString totalTimeElapsed)
+                //tracefn "Total time taken: %s" (Utils.TimeSpanToReadableString totalTimeElapsed)
                 groupedResults
                 |> List.sortBy (fun (cat,_,_) ->
                     match cat with
@@ -967,5 +967,7 @@ let main() =
         if Environment.GetEnvironmentVariable "PAKET_DETAILED_ERRORS" = "true" then
             printErrorExt true true true exn
         else printError exn
-
+let start = DateTime.Now
 main()
+sprintf "Total time taken: %s" (Utils.TimeSpanToReadableString (DateTime.Now.Subtract(start)))
+|> Console.WriteLine

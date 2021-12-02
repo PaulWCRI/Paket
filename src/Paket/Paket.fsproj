@@ -1,19 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net5.0;netcoreapp2.1</TargetFrameworks>
     <PackageId>Paket</PackageId>
     <AssemblyName>paket</AssemblyName>
     <IsPackable>true</IsPackable>
+    <AssemblyVersion>420.69.3.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(PackAsTool)' == 'true' ">
     <!-- .net tools support netcoreapp only -->
-    <TargetFrameworks></TargetFrameworks>
+    <TargetFrameworks>
+    </TargetFrameworks>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="../../README.md" Pack="true" PackagePath="\"/>
-    <None Include="../../docs/files/img/logo.png" Pack="true" PackagePath="\"/>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+    <None Include="../../docs/files/img/logo.png" Pack="true" PackagePath="\" />
     <Compile Include="Commands.fs" />
     <Compile Include="Program.fs" />
     <Content Include="App.config" Condition=" '$(TargetFramework)' == 'net461' " />
@@ -31,4 +34,11 @@
     <ProjectReference Include="..\Paket.Core\Paket.Core.fsproj" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <FSharpCoreResourcesFiles Include="$(OutputPath)**\FSharp.Core.resources.dll" />
+      <FSharpCoreResourcesDirs Include="@(FSharpCoreResourcesFiles->'\%(Directory)') " />
+    </ItemGroup>
+    <RemoveDir Directories="@(FSharpCoreResourcesDirs)" />
+  </Target>
 </Project>
