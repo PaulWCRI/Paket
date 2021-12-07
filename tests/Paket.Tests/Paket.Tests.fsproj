@@ -17,7 +17,7 @@
       <Paket>True</Paket>
       <Link>FsUnit.fs</Link>
     </Compile>
-    <None Include="paket.references" />
+    <None Include="paket.referencesx" />
     <Compile Include="TestHelpers.fs" />
     <Compile Include="UtilsSpecs.fs" />
     <Compile Include="AesSpecs.fs" />
