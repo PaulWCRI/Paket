@@ -1,8 +1,0 @@
-type file
-id Foo
-authors Bar
-description FooPackage
-version 1
-files
-    !*paket.*
-    ** ==> lib

@@ -1,4 +1,0 @@
-source bin
-
-nuget Paket.Test.A
-

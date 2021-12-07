@@ -1,7 +1,0 @@
-source https://nuget.org/api/v2
-
-group Build
-	source https://nuget.org/api/v2
-
-	nuget BuildBundlerMinifier 1.8.154
-	nuget BuildWebCompiler 1.10.310

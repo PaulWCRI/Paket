@@ -1,4 +1,0 @@
-source my-package-source
-framework: net45
-nuget Microsoft.AspNet.Mvc
-nuget RazorEngine

@@ -1,5 +1,0 @@
-type project
-description test
-authors test
-
-interproject-references keep-major

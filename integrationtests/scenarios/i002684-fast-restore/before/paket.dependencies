@@ -1,4 +1,0 @@
-source https://api.nuget.org/v3/index.json
-restriction: || (==netstandard20) (== netcoreapp21)
-storage: none
-nuget FSharp.Core

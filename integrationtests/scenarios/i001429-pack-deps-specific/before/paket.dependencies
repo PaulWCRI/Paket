@@ -1,3 +1,0 @@
-source https://nuget.org/api/v2
-
-nuget MySql.Data 2.3.4

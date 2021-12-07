@@ -1,4 +1,0 @@
-MultiTarget
-Dapper
-NUnit
-  exclude nunit.framework.dll

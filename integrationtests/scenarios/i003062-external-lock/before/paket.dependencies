@@ -1,5 +1,0 @@
-source http://www.nuget.org/api/v2
-
-external_lock ./external.paket.lock
-
-nuget FAKE

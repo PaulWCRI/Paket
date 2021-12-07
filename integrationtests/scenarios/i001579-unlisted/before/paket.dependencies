@@ -1,6 +1,0 @@
-source bin
-source https://www.nuget.org/api/v2
-
-nuget Mvvmlight ~> 4
-
-nuget Paket.Test.A

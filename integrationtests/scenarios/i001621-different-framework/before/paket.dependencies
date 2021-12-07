@@ -1,4 +1,0 @@
-redirects: on
-source https://www.nuget.org/api/v2
-
-nuget NUnit = 3.0.1

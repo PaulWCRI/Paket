@@ -1,4 +1,0 @@
-source https://nuget.org/api/v2
-framework: net45
-generate_load_scripts: true
-nuget Newtonsoft.Json
