@@ -894,10 +894,17 @@ module ProjectFile =
                             match condition with
                             | "$(TargetFrameworkIdentifier) == 'true'" -> "true"
                             | _ -> condition
-
+                        //if condition = "$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.7' Or $(TargetFrameworkVersion) == 'v4.7.2')" then System.Diagnostics.Debugger.Break()
+                        let projName = Path.GetFileNameWithoutExtension project.FileName // (new FileInfo(project.FileName)).Name
+                        let packageName =
+                            if itemGroup.HasChildNodes then
+                                let i = itemGroup.FirstChild.Attributes.["Include"].Value
+                                $" And $(registry:HKEY_CURRENT_USER\Software\WCRI\{projName}@{i}) != 1"
+                            else
+                                ""
                         let whenNode =
                             createNode "When" project
-                            |> addAttribute "Condition" condition
+                            |> addAttribute "Condition" $"({condition}){packageName}"
 
                         if not itemGroup.IsEmpty then
                             whenNode.AppendChild itemGroup |> ignore
