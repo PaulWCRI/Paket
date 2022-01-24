@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net5.0;netcoreapp2.1</TargetFrameworks>
@@ -33,7 +34,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Paket.Core\Paket.Core.fsproj" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <ItemGroup>
       <FSharpCoreResourcesFiles Include="$(OutputPath)**\FSharp.Core.resources.dll" />
@@ -41,4 +41,5 @@
     </ItemGroup>
     <RemoveDir Directories="@(FSharpCoreResourcesDirs)" />
   </Target>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
