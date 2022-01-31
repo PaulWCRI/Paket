@@ -7,7 +7,7 @@
     <AssemblyName>paket</AssemblyName>
     <IsPackable>true</IsPackable>
     <AssemblyVersion>420.69.5.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <FileVersion>420.69.5.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(PackAsTool)' == 'true' ">
     <!-- .net tools support netcoreapp only -->
