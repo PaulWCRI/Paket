@@ -1233,18 +1233,18 @@ module ProjectFile =
                     let group, packName = kv.Key
                     group.CompareString, packName.CompareString)
             |> Seq.map (fun (kv,installSettings,restrictionList,projectModel) ->
-                if directPackages.ContainsKey kv.Key then
-                    let targetProfiles = getTargetProfiles project
-                    targetProfiles
-                    |> Seq.filter (fun targetProfile -> isTargetMatchingRestrictions(restrictionList,targetProfile))
-                    |> Seq.filter (projectModel.GetLibReferenceFiles >> Seq.isEmpty)
-                    |> Seq.iter (fun targetProfile ->
-                            let libReferences =
-                                projectModel.GetAllLegacyReferences()
+                //if directPackages.ContainsKey kv.Key then
+                //    let targetProfiles = getTargetProfiles project
+                //    targetProfiles
+                //    |> Seq.filter (fun targetProfile -> isTargetMatchingRestrictions(restrictionList,targetProfile))
+                //    |> Seq.filter (projectModel.GetLibReferenceFiles >> Seq.isEmpty)
+                //    |> Seq.iter (fun targetProfile ->
+                //            let libReferences =
+                //                projectModel.GetAllLegacyReferences()
 
-                            if not (Seq.isEmpty libReferences) then
-                                traceWarnfn "Package %O contains libraries, but not for the selected TargetFramework %O in project %s."
-                                    (snd kv.Key) targetProfile project.FileName)
+                //            if not (Seq.isEmpty libReferences) then
+                //                traceWarnfn "Package %O contains libraries, but not for the selected TargetFramework %O in project %s."
+                //                    (snd kv.Key) targetProfile project.FileName)
 
                 let importTargets = defaultArg installSettings.ImportTargets true
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,7 +6,7 @@
     <PackageId>Paket</PackageId>
     <AssemblyName>paket</AssemblyName>
     <IsPackable>true</IsPackable>
-    <AssemblyVersion>420.69.4.0</AssemblyVersion>
+    <AssemblyVersion>420.69.5.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(PackAsTool)' == 'true' ">
